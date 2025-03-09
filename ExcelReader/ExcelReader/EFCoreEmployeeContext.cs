@@ -14,6 +14,13 @@ namespace ExcelReader
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb; Database=ExcelReader;Trusted_Connection=True;");
+
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.EmployeeID)
+                .ValueGeneratedNever(); // Allows explicit ID insertion
         }
 
     }

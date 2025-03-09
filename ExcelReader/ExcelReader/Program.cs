@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
+
 namespace ExcelReader
 {
     internal class Program
@@ -8,6 +9,7 @@ namespace ExcelReader
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
+            string excelFilePath = @"C:\Users\Rodney\source\repos\ExcelReader\ExcelReader\employees.xlsx";
 
             // check if database exists. If it does not exist, create it. If it exists, delete it and create it again.
             using (var context = new EFCoreEmployeeContext())
@@ -29,7 +31,11 @@ namespace ExcelReader
                 Console.WriteLine("Creating the database!");
                 context.Database.Migrate();
                 Console.WriteLine("Created the database!");
+
+                DatabaseOperations.ReadFromExcelAndWriteToDatabase(context, excelFilePath);
+                DatabaseOperations.ReadFromDatabase(context);
             }
+            
 
         }
     }
